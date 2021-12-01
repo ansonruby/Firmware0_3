@@ -56,7 +56,7 @@ class Websocket(threading.Thread):
         raise NotImplementedError
 
     def open_handshake(self):
-        data = self.conn.recv(4096)
+        data = self.conn.recv(262144)
 
         if data:
             data = data.decode('utf-8')
@@ -104,10 +104,10 @@ class Websocket(threading.Thread):
 
         if PAYLOAD_LENGTH == 126:
             data = self.conn.recv(2)
-            PAYLOAD_LENGTH = struct.unpack('B', data)[0]
+            PAYLOAD_LENGTH = struct.unpack('H', data)[0]
         elif PAYLOAD_LENGTH == 127:
             data = self.conn.recv(8)
-            PAYLOAD_LENGTH = struct.unpack('B', data)[0]
+            PAYLOAD_LENGTH = struct.unpack('Q', data)[0]
 
         MASKING_KEY = self.conn.recv(4)
 

@@ -75,7 +75,7 @@ Generar_PIN             = lib.Generar_PIN.Generador_Pines
 
 
 # inicio de variable	--------------------------------------
-PP_Mensajes = 1     # 0: NO print  1: Print
+PP_Mensajes = 0     # 0: NO print  1: Print
 
 
 Direc_Torniquete = Leer_Estado(13)  #print Direc_Torniquete
@@ -530,12 +530,18 @@ def Respuesta_Sin_Internet(QR_RUT, T_A,  IDQ_Encrip, QR):
                     Decision_Torniquete (Resp,QR,"",T_A,'1','1')
 
                     Dato_Resp =''
-                    if Resp == 'Access granted-E':   Dato_Resp = QR+'.'+T_A+'.'+'1'+'.0.'+'1'
-                    if Resp == 'Access granted-S':   Dato_Resp = QR+'.'+T_A+'.'+'1'+'.1.'+'1'
+                    if Resp == 'Access granted-E':
+                        
+                        Dato_Resp = QR+'.'+T_A+'.'+'1'+'.0.'+'1'
+                        print 'guardando'#no enviar null
+                        Add_File(CONT_AUTORIZADOS,Dato_Resp+'\n')
+                        Set_File(CONT_FlAG_AUTORIZADOS,'1')
 
-                    print 'guardando'
-                    Add_File(CONT_AUTORIZADOS,Dato_Resp+'\n')
-                    Set_File(CONT_FlAG_AUTORIZADOS,'1')
+                    if Resp == 'Access granted-S':
+                        Dato_Resp = QR+'.'+T_A+'.'+'1'+'.1.'+'1'
+                        print 'guardando'#no enviar null
+                        Add_File(CONT_AUTORIZADOS,Dato_Resp+'\n')
+                        Set_File(CONT_FlAG_AUTORIZADOS,'1')
 
             else:
                 #print 'futuro'

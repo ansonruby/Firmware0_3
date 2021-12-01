@@ -39,6 +39,8 @@ TAB_USER = FIRM + DATA + 'Tabla_Usuarios.txt'               # Usuarios del servi
 TAB_ENVI = FIRM + DATA + 'Tabla_Enviar.txt'                 # ? posible filtro para mejorar aun no utilizadosd
 TAB_AUTO = FIRM + DATA + 'Tabla_Autorizados.txt'            # Registro de usuarios autorizados entrada y salida
 
+TAB_LECTOR = '/home/pi/Firmware/db/Data/Tabla_Lector.txt'            # Registro de usuarios autorizados entrada y salida
+TAB_SERVER = '/home/pi/Firmware/db/Data/Tabla_Servidor.txt'            # Registro de usuarios autorizados entrada y salida
 #---------------------------------
 #           Comandos
 #---------------------------------
@@ -72,6 +74,14 @@ CONT_FlAG_AUTORIZADOS = '/home/pi/Firmware/ComCounter/db/flagtosend.txt'#  Bande
 
 CONT_NEW_TICKET = '/home/pi/Firmware/ComCounter/db/datanewsreceived.txt'#'/home/pi/Data.txt'
 CONT_FlAG_NEW_TICKET = '/home/pi/Firmware/ComCounter/db/flagnewsreceived.txt'#'/home/pi/Flag.txt'
+
+CONT_DEL_AUTORIZADOS = '/home/pi/Firmware/ComCounter/db/datadelreceived.txt'        #'/home/pi/Data.txt'
+CONT_FlAG_DEL_AUTORIZADOS = '/home/pi/Firmware/ComCounter/db/flagdelreceived.txt'   #'/home/pi/Flag.txt'
+
+CONT_UPDATE_USERS = '/home/pi/Firmware/ComCounter/db/dataupdatereceived.txt'#'/home/pi/Data.txt'
+CONT_FlAG_UPDATE_USERS = '/home/pi/Firmware/ComCounter/db/flagupdatereceived.txt'#'/home/pi/Flag.txt'
+
+
 
 
 #---------------------------------

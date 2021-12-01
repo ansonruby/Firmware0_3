@@ -56,21 +56,32 @@ def Verificar_ID_Tipo_3(Pal): #mejorar por que podia pasa cualquiera
     return -1
 """
 
-def add_user_counter(usuario):
+def add_Autorizados_Tikecket(usuario):
 
     puntos = usuario.count(".")
     print puntos
 
+    if puntos == 8:
+
+        print usuario
+        Add_File(TAB_LECTOR, usuario+'\n')
+        print 'Nuevo'
+    else:
+        print 'No cumple parametros'
+
+
+
+
+
+
+def add_New_Tikecket(usuario):
+
+    puntos = usuario.count(".")
+    #print puntos
+
     if puntos == 3:
         s = usuario.split(".")
-        #ID =s[0]
-        #print s[0]
-        #print s[1]
-        #print s[2]
-        #print s[3]
-        #print s[4]
-        #print IDPrueba
-        #ID='12dsad'
+
         ID = s[1] + '.' + s[2] + '.' + s[3]
 
         Respuesta = Verificar_ID_Tipo_3(ID)
@@ -86,31 +97,87 @@ def add_user_counter(usuario):
         print 'No cumple parametros'
 
 
-
-
 def Resolver_Comando_Counter():
 
     global Comando_Antes
+
     #print CONT_FlAG_NEW_TICKET
-    flag = Get_File(CONT_FlAG_NEW_TICKET)
-    #print flag
-    if  flag == '1':
-        #print 'dentro'
+    #-----------------------------  Nuevos Tikecket
+    flag_new_Tickedt = Get_File(CONT_FlAG_NEW_TICKET)
 
+    #print flag_new_Tickedt
 
-        Comando =  Get_File(CONT_NEW_TICKET) #Leer_Archivo(48)}
+    if  flag_new_Tickedt == '1':
+
+        Comando =  Get_File(CONT_NEW_TICKET)
         #print Comando
+
+        #--- mejorar la validacion de campo
         if len(Comando) >= 1 :
             Usuarios = Comando.split("\n")
             for linea in Usuarios:
                 s=linea.rstrip('\n')
                 if len(s) > 0:
                     #print s
-                    add_user_counter(s)
+                    add_New_Tikecket(s)
 
-        Clear_File(CONT_NEW_TICKET) #Borrar(48)
 
+        Clear_File(CONT_NEW_TICKET)
         Clear_File(CONT_FlAG_NEW_TICKET)
+
+    #-----------------------------  Eliminar Autorizados
+    flag_del_Autorizados = Get_File(CONT_FlAG_DEL_AUTORIZADOS)
+    if  flag_del_Autorizados == '1':
+
+        Comando =  Get_File(CONT_DEL_AUTORIZADOS)
+        #--- mejorar la validacion de campo
+        if len(Comando) >= 1 :
+            Usuarios = Comando.split("\n")
+            for linea in Usuarios:
+                s=linea.rstrip('\n')
+                if len(s) > 0:
+                    #print s
+                    add_Autorizados_Tikecket(s)
+
+        #Add_File(TAB_LECTOR, Comando)
+
+        Clear_File(CONT_FlAG_DEL_AUTORIZADOS)
+        Clear_File(CONT_DEL_AUTORIZADOS)
+
+    #-----------------------------  Actualizar Usuarios ----
+    flag_Update_Usuarios = Get_File(CONT_FlAG_UPDATE_USERS)
+    if  flag_Update_Usuarios == '1':
+
+        Comando =  Get_File(CONT_UPDATE_USERS)
+        #--- mejorar la validacion de campo
+        #antes de borrar tab berificar si hay usuaior corectos nuevos
+        Clear_File(TAB_SERVER)
+
+        if len(Comando) >= 1 :
+            Usuarios = Comando.split("\n")
+            for linea in Usuarios:
+                s=linea.rstrip('\n')
+                if len(s) > 0:
+                    #print s
+                    add_New_Tikecket(s)
+
+
+        #Set_File(TAB_SERVER, Comando)
+
+        Clear_File(TAB_LECTOR)
+        Clear_File(CONT_FlAG_UPDATE_USERS)
+        Clear_File(CONT_UPDATE_USERS)
+
+
+
+
+
+
+
+
+#print 'listo'
+#Resolver_Comando_Counter()
+
 
 
 
@@ -136,18 +203,18 @@ print 'Texto: ' + r.text
 
 time.sleep(1.05)
 """
-#print 'listo'
-#Resolver_Comando_Counter()
+
 
 #print Get_Post_try_catch('POST', 'http://192.168.0.14/Prueba/new_user.php', CE_datos, '', 2)
 #print Get_Post_try_catch('POST', 'http://192.168.0.14/api/counter/new_user/index.php', CE_datos, '', 2)
 
 
-
-#while 1:
+"""
+while 1:
 
     #---------------------------------------------------------
     #  Proceso 0: Tiempo de espera para disminuir proceso
     #---------------------------------------------------------
-    #time.sleep(1.05)
-    #Resolver_Comando_Counter()
+    time.sleep(1.05)
+    Resolver_Comando_Counter()
+"""
